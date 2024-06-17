@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 direction;
 
+    private bool lastFlipX = false;
+    private bool isReversed = false;
+
     private void Start()
     {
         direction = new Vector2(xDir, yDir).normalized;
@@ -23,7 +26,50 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnFlip()
     {
+        if (!isReversed)
+        {
+            if (lastFlipX)
+            {
+                yDir = yDir * -1;
+                lastFlipX = false;
+            }
+            else
+            {
+                xDir = xDir * -1;
+                lastFlipX = true;
+            }
+        }
+        else
+        {
+            if (lastFlipX)
+            {
+                xDir = xDir * -1;
+                lastFlipX = false;
+            }
+            else
+            {
+                yDir = yDir * -1;
+                lastFlipX = true;
+            }
+        }
+        UpdateDirection();
+    }
+
+    private void OnFire()
+    {
+        ReverseDir();
+    }
+
+    private void ReverseDir()
+    {
+        yDir = yDir * -1;
         xDir = xDir * -1;
+        isReversed = !isReversed;
+        UpdateDirection();
+    }
+
+    private void UpdateDirection()
+    {
         direction = new Vector2(xDir, yDir).normalized;
     }
 }
