@@ -60,6 +60,12 @@ public class PlayerMovement : MonoBehaviour
         ReverseDir();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("HIT");
+        Destroy(gameObject);
+    }
+
     private void ReverseDir()
     {
         yDir = yDir * -1;
