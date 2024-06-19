@@ -14,7 +14,7 @@ public class SpawnPointManager : MonoBehaviour
         SpawnObject();
     }
 
-    void SpawnObject()
+    public void SpawnObject()
     {
         Vector2 randomPoint = GetRandomPointInOuterDiamond();
         Instantiate(objectToSpawn, new Vector3(randomPoint.x, randomPoint.y, 0), Quaternion.identity);
