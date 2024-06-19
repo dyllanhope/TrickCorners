@@ -14,6 +14,13 @@ public class PlayerMovement : MonoBehaviour
     private bool lastFlipX = false;
     private bool isReversed = false;
 
+    SpawnPointManager spawnPointManager;
+
+    private void Awake()
+    {
+        spawnPointManager = FindObjectOfType<SpawnPointManager>();
+    }
+
     private void Start()
     {
         direction = new Vector2(xDir, yDir).normalized;
@@ -55,9 +62,11 @@ public class PlayerMovement : MonoBehaviour
         UpdateDirection();
     }
 
-    private void OnFire()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         ReverseDir();
+        Destroy(collision.gameObject);
+        spawnPointManager.SpawnObject();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
