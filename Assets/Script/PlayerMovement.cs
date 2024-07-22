@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
         ReverseDir();
         Destroy(collision.gameObject);
         spawnPointManager.SpawnObject();
-        Debug.Log(scoreManager.GetCurrentScore());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
