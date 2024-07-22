@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,10 +16,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isReversed = false;
 
     SpawnPointManager spawnPointManager;
+    ScoreManager scoreManager;
 
     private void Awake()
     {
         spawnPointManager = FindObjectOfType<SpawnPointManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     private void Start()
@@ -64,9 +67,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        scoreManager.IncreaseScore();
+        movementSpeed += 0.1f;
         ReverseDir();
         Destroy(collision.gameObject);
         spawnPointManager.SpawnObject();
+        Debug.Log(scoreManager.GetCurrentScore());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
