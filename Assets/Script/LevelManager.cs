@@ -5,13 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    ScoreManager scoreManager;
+
+    private void Awake()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
     public void StartGame()
     {
         SceneManager.LoadScene("MainScene");
+        scoreManager.ResetScore();
     }
     public void EndGame()
     {
         SceneManager.LoadScene("EndScene");
+        scoreManager.GetCurrentScore();
+
     }
     public void MainMenu()
     {
@@ -21,4 +30,4 @@ public class LevelManager : MonoBehaviour
     {
         Application.Quit();
     }
-} 
+}
