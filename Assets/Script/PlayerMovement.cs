@@ -17,11 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
     SpawnPointManager spawnPointManager;
     ScoreManager scoreManager;
+    LevelManager levelManager;
 
     private void Awake()
     {
         spawnPointManager = FindObjectOfType<SpawnPointManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void Start()
@@ -77,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
+        levelManager.EndGame();
     }
 
     private void ReverseDir()
